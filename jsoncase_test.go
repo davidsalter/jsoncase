@@ -27,7 +27,7 @@ func TestConvertKeysCase(t *testing.T) {
   }
 }`
 
-	var jsonData map[string]interface{}
+	var jsonData map[string]any
 	err := json.Unmarshal([]byte(inputJSON), &jsonData)
 	if err != nil {
 		t.Fatalf("Error unmarshalling input JSON: %v", err)

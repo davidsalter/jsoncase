@@ -32,7 +32,7 @@ func main() {
 		return
 	}
 
-	var jsonData map[string]interface{}
+	var jsonData map[string]any
 	err = json.Unmarshal(data, &jsonData)
 	if err != nil {
 		fmt.Println("Error unmarshalling Json:", err)
@@ -50,10 +50,10 @@ func main() {
 	fmt.Println(string(modifiedData))
 }
 
-func convertKeysCase(data interface{}, caseFlag bool) interface{} {
+func convertKeysCase(data any, caseFlag bool) any {
 	switch v := data.(type) {
-	case map[string]interface{}:
-		caseMap := make(map[string]interface{})
+	case map[string]any:
+		caseMap := make(map[string]any)
 		for key, value := range v {
 			if caseFlag {
 				caseMap[strings.ToUpper(key)] = convertKeysCase(value, caseFlag)
@@ -62,7 +62,7 @@ func convertKeysCase(data interface{}, caseFlag bool) interface{} {
 			}
 		}
 		return caseMap
-	case []interface{}:
+	case []any:
 		for i, item := range v {
 			v[i] = convertKeysCase(item, caseFlag)
 		}
